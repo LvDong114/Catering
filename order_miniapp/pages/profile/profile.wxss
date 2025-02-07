@@ -1,0 +1,47 @@
+/* pages/profile/profile.wxss */
+.container {
+  padding: 20px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+.info view{
+  font-size: 30px;
+  margin-left: 30px;
+}
+.info image{
+  width: 20px;
+  height: 20px;
+  margin-left: 30px;
+}
+
+.avatar image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.funtion-nav{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  align-self: start;
+}
+.funtion-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.funtion-list view{
+  width: 98%;
+  height: 40px;
+  line-height: 40px;
+  background-color: #eeeeee;
+  border-radius: 8px;
+  padding-left: 10px;
+}

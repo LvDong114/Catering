@@ -1,0 +1,17 @@
+<!--pages/login.wxml-->
+<view class="container">
+  <view class="form">
+    <input 
+      placeholder="用户名" 
+      data-field="username" 
+      bindinput="handleInput"
+    />
+    <input 
+      placeholder="密码" 
+      password 
+      data-field="password" 
+      bindinput="handleInput"
+    />
+    <button bindtap="handleLogin">登录</button>
+  </view>
+</view>

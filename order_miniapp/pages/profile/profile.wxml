@@ -1,0 +1,19 @@
+<!--pages/profile/profile.wxml-->
+<view class="container">
+  <view class="user-info">
+    <view class="avatar">
+      <image src="https://img0.baidu.com/it/u=3600954679,641662266&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" mode="aspectFill"></image>
+    </view>
+    <view class="info">
+      <view >你好！{{ user.nickname }}</view>
+      <image wx:if="{{user.is_vip}}" src="/images/vip.png" mode=""/>
+      <image wx:if="{{!user.is_vip}}" src="/images/novip.png" mode=""/>
+    </view>
+  </view> 
+    <view class="funtion-list">
+      <view>个人资料</view>
+      <view bindtap="goToOrder">我的订单</view>
+      <view>我的会员卡</view>
+      <view>关于</view>
+    </view>
+</view>

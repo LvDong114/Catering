@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+    <style>
+        .order-detail-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .order-detail-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .order-info {
+            margin-bottom: 20px;
+        }
+        .order-info p {
+            margin: 5px 0;
+        }
+        .order-items {
+            margin-top: 20px;
+        }
+        .order-items table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .order-items th, .order-items td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .order-items th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .back-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-detail-container">
+        <h1>订单详情</h1>
+        <div class="order-info">
+            <p><strong>订单号:</strong> {{ order.order_number }}</p>
+            <p><strong>用户:</strong> {{ order.user.username }}</p>
+            <p><strong>总金额:</strong> ¥{{ order.total_amount }}</p>
+            <p><strong>状态:</strong> {{ order.get_status_display }}</p>
+            <p><strong>创建时间:</strong> {{ order.formatted_created_at }}</p>
+            <p><strong>更新时间:</strong> {{ order.formatted_updated_at }}</p>
+            <p><strong>收货人姓名:</strong> {{ order.recipient_name }}</p>
+            <p><strong>收货人电话:</strong> {{ order.recipient_phone }}</p>
+            <p><strong>收货地址:</strong> {{ order.recipient_address }}</p>
+            <p><strong>备注:</strong> {{ order.note }}</p>
+        </div>
+        <div class="order-items">
+            <h2>订单项</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>菜品</th>
+                        <th>数量</th>
+                        <th>单价</th>
+                        <th>小计</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                    <tr>
+                        <td>{{ item.dish.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>¥{{ item.price }}</td>
+                        <td>¥{{ item.get_subtotal }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="/admin/order_management/" class="back-btn">返回订单管理</a>
+    </div>
+</body>
+</html> 

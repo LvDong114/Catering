@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑菜品</title>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-actions {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .form-actions button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .save-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .cancel-btn {
+            background-color: #f44336;
+            color: white;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>编辑菜品</h1>
+        <form method="post" action="/admin/edit_dish/{{ dish.id }}/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">名称:</label>
+                <input type="text" id="name" name="name" value="{{ dish.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="category">分类:</label>
+                <select id="category" name="category" required>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id == dish.category.id %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">描述:</label>
+                <textarea id="description" name="description" rows="4" required>{{ dish.description }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">价格:</label>
+                <input type="number" step="0.01" id="price" name="price" value="{{ dish.price }}" required>
+            </div>
+            <div class="form-group">
+                <label for="stock">库存:</label>
+                <input type="number" id="stock" name="stock" value="{{ dish.stock }}" required>
+            </div>
+            <div class="form-group">
+                <label for="status">状态:</label>
+                <select id="status" name="status">
+                    <option value="true" {% if dish.status %}selected{% endif %}>激活</option>
+                    <option value="false" {% if not dish.status %}selected{% endif %}>未激活</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="is_recommend">推荐:</label>
+                <select id="is_recommend" name="is_recommend">
+                    <option value="true" {% if dish.is_recommend %}selected{% endif %}>是</option>
+                    <option value="false" {% if not dish.is_recommend %}selected{% endif %}>否</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cover_image">封面图片:</label>
+                <input type="file" id="cover_image" name="cover_image">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" onclick="window.history.back()">取消</button>
+                <button type="submit" class="save-btn">保存更改</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

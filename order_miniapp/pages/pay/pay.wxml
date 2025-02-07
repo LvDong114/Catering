@@ -1,0 +1,36 @@
+<!--pages/pay/pay.wxml-->
+<view class="container">
+  <view class="section">
+    <view class="section-title">用户信息</view>
+    <view class="section-content">
+      <text class="info-text">用户名: {{user.username}}</text>
+      <text class="info-text">手机号: {{user.phone}}</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">已选菜品</view>
+    <view class="section-content">
+      <block wx:for="{{cart}}" wx:key="id">
+        <view class="cart-item">
+          <text class="cart-item-name">{{item.name}}</text>
+          <text class="cart-item-quantity">x{{item.quantity}}</text>
+          <text class="cart-item-price">￥{{item.price * item.quantity}}</text>
+        </view>
+      </block>
+      <view class="total-amount">总金额: ￥{{totalAmount}}</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">支付信息</view>
+    <view class="section-content">
+      <input class="input-field" placeholder="请输入收货人姓名" bindinput="handleRecipientNameInput" value="{{ user.nickname }}" />
+      <input class="input-field" placeholder="请输入收货人电话" bindinput="handlePhoneInput" value="{{user.phone}}" />
+      <input class="input-field" placeholder="请输入收货地址" bindinput="handleAddressInput" />
+      <input class="input-field" placeholder="请输入备注" bindinput="handleNoteInput" />
+    </view>
+  </view>
+
+  <button class="pay-btn" bindtap="handlePay">支付</button>
+</view>

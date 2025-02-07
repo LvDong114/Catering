@@ -1,0 +1,216 @@
+/* pages/order/order.wxss */
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+.loading, .error {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin-top: 20px;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+}
+
+.categories {
+  width: 30%; /* 分类占 30% */
+  border-right: 1px solid #eee;
+  position: fixed; /* 固定分类栏 */
+  height: 100%; /* 高度占满屏幕 */
+  overflow-y: auto; /* 允许滚动 */
+  left: 0; /* 靠最左边 */
+  text-align: center;
+  background-color: #fff; /* 背景色 */
+  z-index: 1; /* 确保分类栏在菜品列表上方 */
+}
+
+.category {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.category.active {
+  background-color: #f0f0f0;
+}
+
+.category-name {
+  font-size: 16px;
+  color: #333;
+}
+
+.dishes {
+  width: 70%; /* 菜品占 70% */
+  margin-left: 30%; /* 为分类栏留出空间 */
+  padding: 10px; /* 内边距 */
+  box-sizing: border-box; /* 确保宽度包含内边距 */
+}
+
+.dish {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-start; /* 顶部对齐 */
+}
+
+.dish-image {
+  width: 20%; /* 封面图片占卡片的 20% */
+  height: auto;
+  aspect-ratio: 1; /* 保持图片为正方形 */
+  border-radius: 8px;
+  margin-right: 10px; /* 图片与信息之间的间距 */
+  object-fit: cover; /* 图片自动拉伸充满容器 */
+}
+
+.dish-info {
+  width: 60%;
+  display: flex;
+  flex-direction: column; /* 垂直排列 */
+  justify-content: space-between; /* 均匀分布 */
+  flex: 1;
+}
+
+.dish-name {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px; /* 菜名与价格之间的间距 */
+  white-space: nowrap; /* 禁止换行 */
+  overflow: hidden; /* 超出部分隐藏 */
+  text-overflow: ellipsis; /* 超出部分显示省略号 */
+}
+
+.dish-price {
+  font-size: 14px;
+  color: #e67e22;
+  margin-bottom: 10px; /* 价格与按钮之间的间距 */
+}
+
+.add-to-cart-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  /* width: 50px; 固定按钮宽度 */
+}
+
+.no-dishes {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin-top: 20px;
+}
+
+.cart {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+/* 购物车容器 */
+.cart {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* 购物车头部 */
+.cart-header {
+  display: flex;
+  flex-direction: row;
+}
+
+/* 购物车左侧内容 */
+.cart-header-left {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  align-items: center;
+}
+
+.cart-header-left text {
+  align-items: center;
+  font-size: 18px;
+}
+
+.total-amount {
+  color: #e67e22;
+}
+
+/* 购物车右侧按钮 */
+.cart-header-right {
+  display: flex;
+  flex-direction: row;
+  
+  padding: 0;
+}
+
+.clear-btn, .checkout-btn {
+  display: block;
+  height: 40px;
+  width: 100px !important;
+  text-align: center;
+}
+
+.clear-btn {
+  background-color: yellow;
+}
+
+.checkout-btn {
+  background-color: #4CAF50;
+}
+
+.cart-content {
+  padding: 10px 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 垂直居中 */
+  margin-bottom: 10px;
+}
+
+.cart-item-name {
+  font-size: 14px;
+  color: #333;
+}
+
+.cart-item-right {
+  display: flex;
+  align-items: center; /* 垂直居中 */
+}
+
+.cart-item-quantity {
+  font-size: 14px;
+  color: #666;
+  margin-right: 10px; /* 数量与删除按钮之间的间距 */
+}
+
+.delete-btn {
+  height: 20px;
+  width: 20px !important;
+  font-size: 1px;
+}
+
+.delete-btn:active {
+  background-color: #d32f2f; /* 点击时的背景色 */
+}

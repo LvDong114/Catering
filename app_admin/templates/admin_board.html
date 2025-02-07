@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        .container { display: flex; height: 100vh; }
+        .sidebar {
+            width: 200px;
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #34495e;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+        .sidebar button:hover {
+            background: #1abc9c;
+        }
+        .content {
+            flex: 1;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <button onclick="loadPage('user_management')">用户管理</button>
+            <button onclick="loadPage('dish_management')">餐品管理</button>
+            <button onclick="loadPage('category_management')">餐品分类管理</button>
+            <button onclick="loadPage('order_management')">订单管理</button>
+            <button onclick="loadPage('announcement_management')">公告管理</button>
+        </div>
+        <div class="content">
+            <iframe id="contentFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        function loadPage(page) {
+            let url = '';
+            switch(page) {
+                case 'user_management':
+                    url = '/admin/user_management/';
+                    break;
+                case 'dish_management':
+                    url = '/admin/dish_management/';
+                    break;
+                case 'category_management':
+                    url = '/admin/category_management/';
+                    break;
+                case 'order_management':
+                    url = '/admin/order_management/';
+                    break;
+                case 'announcement_management':
+                    url = '/admin/announcement_management/'
+                    break;
+            }
+            document.getElementById('contentFrame').src = url;
+        }
+
+        // Load default page
+        window.onload = function() {
+            loadPage('dish_management');
+        };
+    </script>
+</body>
+</html>

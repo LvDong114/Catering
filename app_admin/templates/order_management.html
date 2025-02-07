@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>订单管理</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .action-buttons button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .status-filter {
+            padding: 6px;
+            border-radius: 4px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+        }
+        .view-btn {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>订单管理</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>订单号</th>
+                <th>收货人</th>
+                <th>总金额</th>
+                <th>
+                    <select class="status-filter" onchange="filterOrders(this.value)">
+                        <option value="">状态</option>
+                        <option value="pending">待处理</option>
+                        <option value="processing">处理中</option>
+                        <option value="completed">已完成</option>
+                        <option value="cancelled">已取消</option>
+                    </select>
+                </th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.order_number }}</td>
+                <td>{{ order.recipient_name }}</td>
+                <td>¥{{ order.total_amount }}</td>
+                <td>
+                    <select class="status-filter" onchange="updateOrderStatus({{ order.id }}, this.value)">
+                        <option value="pending" {% if order.status == 'pending' %}selected{% endif %}>待处理</option>
+                        <option value="processing" {% if order.status == 'processing' %}selected{% endif %}>处理中</option>
+                        <option value="completed" {% if order.status == 'completed' %}selected{% endif %}>已完成</option>
+                        <option value="cancelled" {% if order.status == 'cancelled' %}selected{% endif %}>已取消</option>
+                    </select>
+                </td>
+                <td>{{ order.formatted_created_at }}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="view-btn" onclick="viewOrder({{ order.id }})">查看详情</button>
+                        <button class="delete-btn" onclick="deleteOrder({{ order.id }})">删除</button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form method="post" style="display: none;">
+        {% csrf_token %}
+    </form>
+
+    <script>
+        function deleteOrder(orderId) {
+            if (confirm('确定要删除这个订单吗？')) {
+                const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+                fetch(`/admin/delete_order/${orderId}/`, {
+                    method: 'DELETE',
+                    headers: { 'X-CSRFToken': csrfToken }
+                })
+                .then(response => response.ok ? window.location.reload() : alert('删除订单失败。'))
+                .catch(() => alert('发生错误，请重试。'));
+            }
+        }
+
+        function filterOrders(status) {
+            window.location.href = `/admin/order_management/?status=${status}`;
+        }
+
+        function viewOrder(orderId) {
+            window.location.href = `/admin/order_detail/${orderId}/`;
+        }
+
+        function updateOrderStatus(orderId, status) {
+            const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+            fetch(`/admin/update_order_status/${orderId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: status })
+            })
+            .then(response => response.ok ? window.location.reload() : alert('更新订单状态失败。'))
+            .catch(() => alert('发生错误，请重试。'));
+        }
+
+        // 设置默认选中的状态
+        const urlParams = new URLSearchParams(window.location.search);
+        const statusParam = urlParams.get('status');
+        if (statusParam) {
+            const statusFilter = document.querySelector('.status-filter');
+            statusFilter.value = statusParam;
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,86 @@
+/* pages/order_list/order_list.wxss */
+.container {
+  padding: 20px;
+}
+
+.loading, .error {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin-top: 20px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.recipient-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.order-status {
+  font-size: 14px;
+  color: #666;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.item-name {
+  color: #333;
+}
+
+.item-quantity {
+  color: #666;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.order-price {
+  font-size: 16px;
+  color: #e67e22;
+  font-weight: bold;
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+
+.order-date {
+  font-size: 12px;
+  color: #999;
+}

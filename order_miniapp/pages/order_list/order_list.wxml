@@ -1,0 +1,34 @@
+<!--pages/order_list/order_list.wxml-->
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+  <view wx:if="{{error}}" class="error">{{error}}</view>
+  <view wx:else class="order-list">
+    <block wx:for="{{orders}}" wx:key="id">
+      <view class="order-card">
+        <!-- 顶部：收货人和订单状态 -->
+        <view class="order-header">
+          <text class="recipient-name">收货人: {{item.recipient_name}}</text>
+          <text class="order-status">{{item.status_display}}</text>
+        </view>
+
+        <!-- 中间：菜品列表 -->
+        <view class="order-items">
+          <block wx:for="{{item.items}}" wx:key="id">
+            <view class="order-item">
+              <text class="item-name">{{item.dish_detail.name}}</text>
+              <text class="item-quantity">x{{item.quantity}}</text>
+            </view>
+          </block>
+        </view>
+
+        <!-- 底部：订单号和金额/时间 -->
+        <view class="order-footer">
+          <text class="order-price">金额：{{item.total_amount}}</text>
+          <view class="order-details">
+            <text class="order-date">{{item.created_at}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

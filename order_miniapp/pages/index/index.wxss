@@ -1,0 +1,102 @@
+/* pages/index/index.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 0 0;
+  margin: 0 0;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+}
+.swiper-container {
+  width: 100%;
+  height: 400rpx; /* 轮播图高度 */
+  margin-bottom: 20rpx; /* 轮播图与下方内容的间距 */
+}
+
+.swiper-container image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx; /* 圆角效果 */
+}
+.welcome{
+  width: 100%;
+  height: 50px;
+  font-size: 30px;
+  text-align: center;
+}
+.order-vip{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.order-vip button{
+  width: 200px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  padding: 0 0;
+  font-size: 30px;
+}
+.goToOrder{
+  background-color: salmon;
+}
+.joinVip{
+  background-color: gray;
+}
+.announcement-container {
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+
+}
+.announcement{
+  font-size: 20px;
+  padding: 15rpx;
+}
+.announcement-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx;
+  width: 98%;
+  border-bottom: 1rpx solid #eee;
+  background-color: #fff;
+  border-radius: 8rpx;
+  margin-bottom: 10rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.announcement-item:last-child {
+  border-bottom: none;
+}
+
+.announcement-item:active {
+  background-color: #f0f0f0; /* 点击反馈 */
+}
+
+.announcement-title {
+  font-size: 16px;
+  color: #333;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.announcement-time {
+  font-size: 14px;
+  color: #999;
+  margin-left: 20rpx;
+}
+.store-container{
+  width: 98%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-self:center;
+  gap: 10px;
+}
+.store-name{
+  font-size: 20px;
+}
